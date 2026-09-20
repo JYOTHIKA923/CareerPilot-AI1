@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>CareerPilot AI</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+</head>
+
+<body>
+
+    <!-- =====================================================
+         SIDEBAR
+         ===================================================== -->
+
+    <aside class="sidebar">
+
+        <div class="brand">
+            <div class="brand-icon">🚀</div>
+
+            <div>
+                <h1>CareerPilot</h1>
+                <p>AI Career Assistant</p>
+            </div>
+        </div>
+
+
+        <nav class="navigation">
+
+            <button
+                class="nav-item active"
+                data-section="dashboard"
+                type="button"
+            >
+                <span>🏠</span>
+                <span>Dashboard</span>
+            </button>
+
+            <button
+                class="nav-item"
+                data-section="analysis"
+                type="button"
+            >
+                <span>📊</span>
+                <span>Skill Analysis</span>
+            </button>
+
+            <button
+                class="nav-item"
+                data-section="roadmap"
+                type="button"
+            >
+                <span>🗺️</span>
+                <span>Career Roadmap</span>
+            </button>
+
+            <button
+                class="nav-item"
+                data-section="history"
+                type="button"
+            >
+                <span>🕘</span>
+                <span>History</span>
+            </button>
+
+            <button
+                class="nav-item"
+                data-section="settings"
+                type="button"
+            >
+                <span>⚙️</span>
+                <span>Settings</span>
+            </button>
+
+        </nav>
+
+
+        <div class="sidebar-footer">
+            <p>CareerPilot AI</p>
+            <span>Skill-Gap Intelligence</span>
+        </div>
+
+    </aside>
+
+
+
+    <!-- =====================================================
+         MAIN
+         ===================================================== -->
+
+    <main class="main">
+
+        <!-- TOP BAR -->
+
+        <header class="topbar">
+
+            <div>
+                <h2 id="page-title">Dashboard</h2>
+                <p id="page-subtitle">
+                    Analyze your resume against any job description.
+                </p>
+            </div>
+
+            <div class="profile">
+                👤
+            </div>
+
+        </header>
+
+
+
+        <!-- =================================================
+             DASHBOARD
+             ================================================= -->
+
+        <section
+            id="dashboard"
+            class="page-section active-section"
+        >
+
+            <!-- HERO -->
+
+            <div class="hero">
+
+                <div class="hero-content">
+
+                    <span class="hero-badge">
+                        ✨ AI POWERED
+                    </span>
+
+                    <h1>
+                        Find Your Career Skill Gap
+                    </h1>
+
+                    <p>
+                        Upload your resume and paste any job description.
+                        CareerPilot AI compares your skills, identifies
+                        missing skills and creates a personalized career
+                        roadmap.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- INPUT -->
+
+            <form
+                id="analysis-form"
+                enctype="multipart/form-data"
+            >
+
+                <div class="input-grid">
+
+
+                    <!-- RESUME -->
+
+                    <div class="input-card">
+
+                        <div class="card-icon">
+                            📄
+                        </div>
+
+                        <h3>
+                            Upload Resume
+                        </h3>
+
+                        <p>
+                            Upload your resume in PDF format.
+                        </p>
+
+                        <div class="resume-upload">
+
+                            <input
+                                type="file"
+                                id="resume"
+                                name="resume"
+                                accept=".pdf,application/pdf"
+                                required
+                            >
+
+                            <div
+                                id="file-name"
+                                class="file-name"
+                            >
+                                No resume selected
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- JOB DESCRIPTION -->
+
+                    <div class="input-card">
+
+                        <div class="card-icon">
+                            💼
+                        </div>
+
+                        <h3>
+                            Job Description
+                        </h3>
+
+                        <p>
+                            Paste the job description below.
+                        </p>
+
+                        <textarea
+                            id="job_description"
+                            name="job_description"
+                            placeholder="Paste the complete job description here..."
+                            required
+                        ></textarea>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- ANALYZE -->
+
+                <div class="analyze-area">
+
+                    <button
+                        type="submit"
+                        id="analyze-btn"
+                        class="analyze-button"
+                    >
+                        🚀 Analyze Career Match
+                    </button>
+
+                </div>
+
+            </form>
+
+
+
+            <!-- LOADING -->
+
+            <div
+                id="loading"
+                class="loading hidden"
+            >
+
+                <div class="spinner"></div>
+
+                <h3>
+                    Analyzing your career profile...
+                </h3>
+
+                <p>
+                    Reading resume, comparing skills and creating roadmap.
+                </p>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 RESULTS
+                 ================================================= -->
+
+            <div
+                id="results"
+                class="results hidden"
+            >
+
+                <div class="results-heading">
+
+                    <div>
+                        <span class="small-label">
+                            ANALYSIS COMPLETE
+                        </span>
+
+                        <h2>
+                            Your Career Match
+                        </h2>
+
+                        <p>
+                            Here is the comparison between your resume
+                            and the selected job description.
+                        </p>
+                    </div>
+
+                </div>
+
+
+
+                <!-- SCORE -->
+
+                <div class="score-card">
+
+                    <div class="score-info">
+
+                        <span class="small-label">
+                            MATCH SCORE
+                        </span>
+
+                        <h3>
+                            Overall Job Match
+                        </h3>
+
+                        <p>
+                            Based on the required skills found in the
+                            job description.
+                        </p>
+
+                    </div>
+
+                    <div
+                        id="score-value"
+                        class="score-value"
+                    >
+                        0%
+                    </div>
+
+                </div>
+
+
+
+                <!-- SUMMARY -->
+
+                <div class="summary-grid">
+
+                    <div class="summary-card">
+
+                        <span class="summary-icon">
+                            ✅
+                        </span>
+
+                        <div>
+                            <p>Matched Skills</p>
+
+                            <strong id="matched-count">
+                                0
+                            </strong>
+                        </div>
+
+                    </div>
+
+
+                    <div class="summary-card">
+
+                        <span class="summary-icon">
+                            🎯
+                        </span>
+
+                        <div>
+                            <p>Missing Skills</p>
+
+                            <strong id="missing-count">
+                                0
+                            </strong>
+                        </div>
+
+                    </div>
+
+
+                    <div class="summary-card">
+
+                        <span class="summary-icon">
+                            🔄
+                        </span>
+
+                        <div>
+                            <p>Transferable Skills</p>
+
+                            <strong id="transferable-count">
+                                0
+                            </strong>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- THREE RESULT CARDS -->
+
+                <div class="result-grid">
+
+
+                    <!-- MATCHED -->
+
+                    <div class="result-card">
+
+                        <div class="result-card-title">
+                            <span>✅</span>
+
+                            <div>
+                                <h3>
+                                    Matched Skills
+                                </h3>
+
+                                <p>
+                                    Skills you already have
+                                </p>
+                            </div>
+                        </div>
+
+                        <div
+                            id="matched-skills"
+                            class="skill-container"
+                        ></div>
+
+                    </div>
+
+
+
+                    <!-- MISSING -->
+
+                    <div class="result-card">
+
+                        <div class="result-card-title">
+                            <span>🎯</span>
+
+                            <div>
+                                <h3>
+                                    Missing Skills
+                                </h3>
+
+                                <p>
+                                    Skills to learn
+                                </p>
+                            </div>
+                        </div>
+
+                        <div
+                            id="missing-skills"
+                            class="skill-container"
+                        ></div>
+
+                    </div>
+
+
+
+                    <!-- TRANSFERABLE -->
+
+                    <div class="result-card">
+
+                        <div class="result-card-title">
+                            <span>🔄</span>
+
+                            <div>
+                                <h3>
+                                    Transferable Skills
+                                </h3>
+
+                                <p>
+                                    Related skills you can use
+                                </p>
+                            </div>
+                        </div>
+
+                        <div
+                            id="transferable-skills"
+                            class="transferable-container"
+                        ></div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- EVIDENCE -->
+
+                <div class="full-card">
+
+                    <div class="section-heading">
+
+                        <div>
+                            <span>🔎</span>
+
+                            <div>
+                                <h3>
+                                    Resume Evidence
+                                </h3>
+
+                                <p>
+                                    Where your matched skills were found
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div
+                        id="evidence"
+                        class="evidence-list"
+                    ></div>
+
+                </div>
+
+
+
+                <!-- TOP GAPS -->
+
+                <div class="full-card">
+
+                    <div class="section-heading">
+
+                        <div>
+                            <span>🎯</span>
+
+                            <div>
+                                <h3>
+                                    Top Skill Gaps
+                                </h3>
+
+                                <p>
+                                    Focus on these skills first
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div
+                        id="top-gaps"
+                        class="gap-list"
+                    ></div>
+
+                </div>
+
+
+
+                <!-- ROADMAP -->
+
+                <div class="full-card">
+
+                    <div class="section-heading">
+
+                        <div>
+                            <span>🗺️</span>
+
+                            <div>
+                                <h3>
+                                    Personalized Roadmap
+                                </h3>
+
+                                <p>
+                                    A practical path to close your skill gaps
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div
+                        id="roadmap"
+                        class="roadmap"
+                    ></div>
+
+                </div>
+
+
+
+                <!-- PROJECT -->
+
+                <div class="full-card">
+
+                    <div class="section-heading">
+
+                        <div>
+                            <span>💡</span>
+
+                            <div>
+                                <h3>
+                                    Recommended Project
+                                </h3>
+
+                                <p>
+                                    Practice the missing skills through a project
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div
+                        id="project-content"
+                        class="project-content"
+                    ></div>
+
+                </div>
+
+
+
+                <!-- CLEAR -->
+
+                <div class="clear-area">
+
+                    <button
+                        type="button"
+                        id="clear-results"
+                        class="clear-button"
+                    >
+                        🗑️ Clear Results
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             SKILL ANALYSIS PAGE
+             ================================================= -->
+
+        <section
+            id="analysis"
+            class="page-section"
+        >
+
+            <div class="page-card">
+
+                <span class="page-icon">
+                    📊
+                </span>
+
+                <h2>
+                    Skill Analysis
+                </h2>
+
+                <p>
+                    Run an analysis from the Dashboard to see your
+                    matched, missing and transferable skills.
+                </p>
+
+                <button
+                    type="button"
+                    class="primary-button"
+                    data-go-dashboard
+                >
+                    Go to Dashboard
+                </button>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             ROADMAP PAGE
+             ================================================= -->
+
+        <section
+            id="roadmap"
+            class="page-section"
+        >
+
+            <div class="page-card">
+
+                <span class="page-icon">
+                    🗺️
+                </span>
+
+                <h2>
+                    Career Roadmap
+                </h2>
+
+                <p>
+                    Your personalized learning roadmap will appear
+                    after you analyze a resume and job description.
+                </p>
+
+                <button
+                    type="button"
+                    class="primary-button"
+                    data-go-dashboard
+                >
+                    Start Analysis
+                </button>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             HISTORY
+             ================================================= -->
+
+        <section
+            id="history"
+            class="page-section"
+        >
+
+            <div class="page-header-card">
+
+                <div>
+                    <span class="small-label">
+                        SAVED ANALYSES
+                    </span>
+
+                    <h2>
+                        Analysis History
+                    </h2>
+
+                    <p>
+                        Your previous CareerPilot analyses are stored
+                        in this browser.
+                    </p>
+                </div>
+
+                <button
+                    type="button"
+                    id="clear-history"
+                    class="danger-button"
+                >
+                    Clear History
+                </button>
+
+            </div>
+
+            <div
+                id="history-list"
+                class="history-list"
+            ></div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             SETTINGS
+             ================================================= -->
+
+        <section
+            id="settings"
+            class="page-section"
+        >
+
+            <div class="page-card">
+
+                <span class="page-icon">
+                    ⚙️
+                </span>
+
+                <h2>
+                    Settings
+                </h2>
+
+                <p>
+                    CareerPilot currently stores analysis history
+                    locally in your browser.
+                </p>
+
+                <button
+                    type="button"
+                    id="clear-all-data"
+                    class="danger-button"
+                >
+                    Clear Local Data
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- TOAST -->
+
+    <div
+        id="toast"
+        class="toast hidden"
+    ></div>
+
+
+    <script
+        src="{{ url_for('static', filename='script.js') }}"
+    ></script>
+
+</body>
+
+</html>
